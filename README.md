@@ -1,6 +1,10 @@
 # Monte Carlo & Statistical Physics
 
-Python simulations developed for undergraduate thermodynamics and statistical mechanics coursework.
+Computational statistical-physics projects covering a hard-sphere gas with thermostatting and a separate three-level Metropolis model.
+
+| Canonical distributions at 300 K | Finite-size fluctuation scaling |
+|---|---|
+| ![Maxwell-Boltzmann distributions at 300 K](assets/maxwell_boltzmann_300K.svg) | ![Energy fluctuation scaling](assets/energy_fluctuation_scaling.svg) |
 
 ## 1. Hard-sphere gas
 
@@ -8,32 +12,42 @@ Starting from the VPython `HardSphereGas` demonstration, the model was extended 
 
 - robust non-overlapping particle initialisation and collision handling
 - an **Andersen thermostat** at **T = 300 K**
-- comparison of simulated speed and kinetic-energy distributions with Maxwell–Boltzmann predictions
-- an external gravitational field and tests of the expected vertical velocity and barometric position distributions
+- comparison of simulated speed and kinetic-energy distributions with Maxwell–Boltzmann theory
+- comparison of weak and strong bath-coupling frequencies
+- an external gravitational field and tests of the expected vertical-velocity and barometric position distributions
 
-### Quantitative checks
+### Source files
 
-- in a reproducible public thermostat validation run, the sampled mean reduced kinetic energy was **E/(kT) ≈ 1.48**, close to the canonical expectation **3/2**
-- for the amplified-gravity validation used to make the barometric gradient numerically visible, the sampled mean height was **−0.4939 m**, versus a theoretical value of approximately **−0.4936 m**
+- [`hard_sphere_q1_radius_study.py`](hard_sphere_q1_radius_study.py) — numerical stability and effective-radius study
+- [`hard_sphere_q2_andersen_thermostat.py`](hard_sphere_q2_andersen_thermostat.py) — canonical-ensemble dynamics with an Andersen thermostat
+- [`hard_sphere_q3_gravity.py`](hard_sphere_q3_gravity.py) — thermostat plus gravitational field
 
-### Files
+The submitted analysis uses the Andersen collision probability
 
-- `hard_sphere_q1_radius_study.py` — numerical stability and atom-radius study
-- `hard_sphere_q2_andersen_thermostat.py` — canonical-ensemble dynamics with Andersen thermostat
-- `hard_sphere_q3_gravity.py` — thermostat plus gravitational-field analysis
+`P(bath collision in Δt) = 1 - exp(-νΔt)`,
+
+with momentum components resampled from the Maxwell–Boltzmann distribution at the bath temperature.
 
 ## 2. Three-level Metropolis model
 
-A separate Monte Carlo model simulates **N independent particles in three energy levels** using Metropolis updates. For the main study, the simulation uses **N = 1,000**, **120,000 Metropolis steps**, a **20,000-step burn-in**, and sampling every **50 steps** (about **2,000 equilibrium samples per temperature**).
+A second Monte Carlo model simulates **N independent particles in three energy levels** using Metropolis updates. The main study uses **N = 1,000**, **120,000 Metropolis steps**, a **20,000-step burn-in**, and sampling every **50 steps**.
 
-The simulation compares equilibrium populations with Boltzmann theory, identifies a characteristic temperature around **105 K**, and tests the finite-size scaling of relative energy fluctuations against the theoretical `N^(-1/2)` law.
+The simulation compares equilibrium populations with Boltzmann theory and tests the finite-size scaling
 
-`three_level_metropolis.py` is a cleaned reconstruction of the full code included in the submitted report appendix.
+`σ_E / <E> ∝ N^(-1/2)`.
+
+Across the reported temperature cases, fitted slopes are close to the theoretical value `-0.5`, with high `R²` values.
+
+### Reproducible companion
+
+- [`python/three_level_metropolis.py`](python/three_level_metropolis.py)
+- [`python/three_level_metropolis.ipynb`](python/three_level_metropolis.ipynb)
+- [`report/README.md`](report/README.md) — provenance and description of the privacy-cleaned PDF portfolio edition
 
 ## Tools
 
-Python, NumPy, Matplotlib, VPython, Monte Carlo / Metropolis sampling, statistical mechanics
+Python, NumPy, Matplotlib, VPython, Monte Carlo / Metropolis sampling and statistical mechanics
 
-## Attribution
+## Attribution and provenance
 
-The hard-sphere implementation is based on the VPython demonstration by **Bruce Sherwood** and was substantially modified for the coursework. The portfolio organisation, analysis and additional simulation code are by **Adrià Saz Guerra**.
+The hard-sphere implementation is based on the VPython demonstration by **Bruce Sherwood** and was substantially modified for the coursework. The submitted report originated as collaborative coursework; collaborator names and student identifiers are omitted from this public portfolio edition for privacy. Repository curation, the reproducible companion notebook and portfolio visualisations are maintained by **Adrià Saz Guerra**.
