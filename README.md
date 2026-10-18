@@ -11,11 +11,16 @@ Starting from the VPython `HardSphereGas` demonstration, the model was extended 
 - comparison of simulated speed and kinetic-energy distributions with Maxwell–Boltzmann predictions
 - an external gravitational field and tests of the expected vertical velocity and barometric position distributions
 
+### Quantitative checks
+
+- in a reproducible public thermostat validation run, the sampled mean reduced kinetic energy was **E/(kT) ≈ 1.48**, close to the canonical expectation **3/2**
+- for the amplified-gravity validation used to make the barometric gradient numerically visible, the sampled mean height was **−0.4939 m**, versus a theoretical value of approximately **−0.4936 m**
+
 ### Files
 
 - `hard_sphere_q1_radius_study.py` — numerical stability and atom-radius study
 - `hard_sphere_q2_andersen_thermostat.py` — canonical-ensemble dynamics with Andersen thermostat
-- `hard_sphere_q3_gravity.py` — thermostat plus gravitational field
+- `hard_sphere_q3_gravity.py` — thermostat plus gravitational-field analysis
 
 ## 2. Three-level Metropolis model
 
