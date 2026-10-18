@@ -1,53 +1,58 @@
 # Monte Carlo & Statistical Physics
 
-Computational statistical-physics projects covering a hard-sphere gas with thermostatting and a separate three-level Metropolis model.
+Simulation project covering a hard-sphere gas, an interacting Lennard–Jones fluid and a three-level Metropolis model.
 
-| Canonical distributions at 300 K | Finite-size fluctuation scaling |
-|---|---|
-| ![Maxwell-Boltzmann distributions at 300 K](assets/maxwell_boltzmann_300K.svg) | ![Energy fluctuation scaling](assets/energy_fluctuation_scaling.svg) |
+## Full report
 
-## 1. Hard-sphere gas
+**[Open the complete report in GitHub's PDF viewer](report/Statistical_Physics_Simulation_Report.pdf)**
 
-Starting from the VPython `HardSphereGas` demonstration, the model was extended and analysed for **500 particles**. The coursework modifications include:
+The public PDF preserves the submitted report and figures, with personal identifiers privacy-masked.
 
-- robust non-overlapping particle initialisation and collision handling
-- an **Andersen thermostat** at **T = 300 K**
-- comparison of simulated speed and kinetic-energy distributions with Maxwell–Boltzmann theory
-- comparison of weak and strong bath-coupling frequencies
-- an external gravitational field and tests of the expected vertical-velocity and barometric position distributions
+## Code
 
-### Source files
+The repository is organized question by question. For the first three questions, the files are the original source files supplied for the coursework; the remaining code is reconstructed from the submitted report and appendix, without inventing unavailable raw simulation trajectories.
 
-- [`hard_sphere_q1_radius_study.py`](hard_sphere_q1_radius_study.py) — numerical stability and effective-radius study
-- [`hard_sphere_q2_andersen_thermostat.py`](hard_sphere_q2_andersen_thermostat.py) — canonical-ensemble dynamics with an Andersen thermostat
-- [`hard_sphere_q3_gravity.py`](hard_sphere_q3_gravity.py) — thermostat plus gravitational field
+| Question | File | Status |
+|---|---|---|
+| Baseline | [`code/HardSphereGas_Original.py`](code/HardSphereGas_Original.py) | Original supplied file |
+| Q1 | [`code/HardSphereGas_Q1.py`](code/HardSphereGas_Q1.py) | Original supplied file |
+| Q2 | [`code/HardSphereGas_Q2.py`](code/HardSphereGas_Q2.py) | Original supplied file |
+| Q3 | [`code/HardSphereGas_Q3.py`](code/HardSphereGas_Q3.py) | Original supplied file |
+| Q4 | [`code/Q4_lennard_jones_stationary_states.py`](code/Q4_lennard_jones_stationary_states.py) | Reconstructed from the report's equations and reported state data |
+| Q5 | [`code/Q5_isothermal_compressibility.py`](code/Q5_isothermal_compressibility.py) | Reconstructed from the report's V(P) tables and analysis |
+| Q6 | [`code/Q6_three_level_metropolis_core.py`](code/Q6_three_level_metropolis_core.py) | Reconstructed Metropolis core from Section 3.2 and Appendix A |
+| Q7 | [`code/Q7_level_occupations.py`](code/Q7_level_occupations.py) | Reconstructed level-occupation analysis from Section 3.3 and Appendix A |
+| Q8 | [`code/Q8_energy_fluctuations.py`](code/Q8_energy_fluctuations.py) | Reconstructed finite-size fluctuation analysis from Section 3.4 and Appendix A |
 
-The submitted analysis uses the Andersen collision probability
+For Q4–Q5 the original source files were not available separately, so the reconstruction is deliberately limited to the methods, equations and numerical data that are actually documented in the report.
 
-`P(bath collision in Δt) = 1 - exp(-νΔt)`,
+## Figures from the submitted report
 
-with momentum components resampled from the Maxwell–Boltzmann distribution at the bath temperature.
+The images below are direct crops from the original PDF rather than regenerated approximations.
 
-## 2. Three-level Metropolis model
+### Andersen thermostat — energy distribution
 
-A second Monte Carlo model simulates **N independent particles in three energy levels** using Metropolis updates. The main study uses **N = 1,000**, **120,000 Metropolis steps**, a **20,000-step burn-in**, and sampling every **50 steps**.
+![Andersen thermostat](assets/stat_fig7_andersen_thermostat.jpg)
 
-The simulation compares equilibrium populations with Boltzmann theory and tests the finite-size scaling
+### Lennard–Jones: supercooled liquid at T = 0.2
 
-`σ_E / <E> ∝ N^(-1/2)`.
+![Lennard Jones](assets/stat_fig15_lennard_jones.jpg)
 
-Across the reported temperature cases, fitted slopes are close to the theoretical value `-0.5`, with high `R²` values.
+### NPT isotherms and isothermal compressibility
 
-### Reproducible companion
+![Isotherms](assets/stat_fig17_isotherms.jpg)
 
-- [`python/three_level_metropolis.py`](python/three_level_metropolis.py)
-- [`python/three_level_metropolis.ipynb`](python/three_level_metropolis.ipynb)
-- [`report/README.md`](report/README.md) — provenance and description of the privacy-cleaned PDF portfolio edition
+### Three-level probabilities
 
-## Tools
+![Level probabilities](assets/stat_fig27_level_probabilities.jpg)
 
-Python, NumPy, Matplotlib, VPython, Monte Carlo / Metropolis sampling and statistical mechanics
+### Finite-size energy-fluctuation scaling
 
-## Attribution and provenance
+![Energy fluctuation scaling](assets/stat_fig28_fluctuation_scaling.jpg)
 
-The hard-sphere implementation is based on the VPython demonstration by **Bruce Sherwood** and was substantially modified for the coursework. The submitted report originated as collaborative coursework; collaborator names and student identifiers are omitted from this public portfolio edition for privacy. Repository curation, the reproducible companion notebook and portfolio visualisations are maintained by **Adrià Saz Guerra**.
+## Main methods
+
+Metropolis Monte Carlo, canonical and isothermal–isobaric ensembles, Andersen thermostat, Maxwell–Boltzmann statistics, radial distribution functions, Widom insertion, Lennard–Jones interactions, finite-size scaling and equilibrium statistical mechanics.
+
+---
+<sub>Public portfolio copy: original coursework completed collaboratively; collaborator names are anonymized and the student identifier is masked.</sub>
